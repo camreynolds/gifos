@@ -1,0 +1,160 @@
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto', sans-serif; */
+$fontcolorligth:#572EE5;
+$bgcolorligth:#572EE5;
+$bgtrending: #F3F5F8;
+$fonttrending:#000000;
+$bgcolorwhite:#FFFFFF;
+
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+body{
+    font-size: 16px;
+}
+h1,h2,h3{
+    font-family: 'Montserrat';
+font-weight: bold;
+color: #572EE5;
+text-align: center;
+}
+
+p{
+    font-family: 'Montserrat';
+    font-weight: 500;
+    color: #572EE5;
+    text-align: center;
+}
+
+.stg-container-img {
+    //position: relative;
+    background: #572EE5;
+    width: 156px;
+    height: 120px;
+    display: flex;
+    flex-flow: column-reverse;
+
+    .stg-container-btn {
+        display: flex;
+        justify-content: flex-end;
+        //z-index: 3;
+        position: relative;
+        top: 35px;
+     
+     
+    }
+     div[data-stgcont-btns='imgGrid']{
+        margin-top: -6px;
+    } 
+    div[data-stgcont-btns='gallery']{
+        margin-top: -3px;
+    }
+
+     div[data-stgcont-btns='imgGridbtn']{
+        z-index: 3;
+    }  
+
+    .imgHover{
+        filter: alpha(opacity=50);
+        opacity: 0.5;
+        //background-color: #572EE5;
+    }
+    img {
+       // position: relative;
+        width: 156px;
+        height: 120px;
+    }
+
+    
+
+/*     img[data-target-img='imgGrid']{
+        top: -36px;
+    }
+    img[data-target-img='gallery']{
+        top: -41px;
+    } */
+}
+.btn{
+background: white;
+color: #572EE5;
+transition-duration: 0.4s;
+cursor: pointer;
+
+}
+.btnHover{
+    color: white;
+    background: $fontcolorligth;
+    border: 1px solid $fontcolorligth; 
+}
+#btnprev,
+#btnnext {
+    border: 1px solid $fontcolorligth;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    font-family: 'Roboto';
+ 
+    &:hover{
+        color: white;
+        background: $fontcolorligth;
+    } 
+}
+.btnvermas {
+    margin: 78px 0px 79px 0px;
+    width: 127px;
+    height: 50px;
+    background-color: $bgcolorwhite;
+    border: 1px solid $bgcolorligth;
+    border-radius: 25px;
+    color: $bgcolorligth;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0;
+
+    &:hover {
+        color: white;
+        background: #572EE5;
+    }
+}
+.btnvideo{
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: $fontcolorligth;
+    text-align: center;
+    border-radius: 100%;
+    border: 1px solid $fontcolorligth;
+}
+
+.actives{
+    color: white;
+    background: #572EE5;
+}
+
+#idface:hover{
+    background-image: url(../images/icon_facebook_active.svg);
+}
+
+.instagramActive{
+    background-image: url(../images/icon_instagram_active.svg);
+}
+
+.twitterActive{
+    background-image: url(../images/icon_twitter_active.svg);
+}
+
+@import "./styleModal.scss";
+@import "./styleMobile.scss";
+@import "./styleDesktop.scss";

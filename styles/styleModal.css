@@ -1,0 +1,168 @@
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  height: 100%;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  /* Could be more or less, depending on screen size */
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 695px auto;
+      grid-template-columns: auto 695px auto;
+  -ms-grid-rows: (2)[auto];
+      grid-template-rows: repeat(auto, 2);
+      grid-template-areas: "modalH modalH modalH" "modalPrev modalImg modalNext" ". modalCap .";
+  grid-row-gap: 22px;
+  grid-column-gap: 25px;
+}
+
+.modalHeader {
+  width: 100%;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: modalH;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.modalHeader .btnModalClose {
+  background: white;
+  background-image: url(../images/close.svg);
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.modal-btnprev {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: modalPrev;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modalImg {
+  width: 100%;
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: modalImg;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modalImg img {
+  width: 695px;
+  height: 385px;
+}
+
+.modal-btnnext {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: modalNext;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modalCaption {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: modalCap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.modalCaption-text {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+}
+
+.modalCaption-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.modalCaption-btn .btn-favorite,
+.modalCaption-btn .btn-download {
+  margin: unset;
+}
+
+.modalCaption-user {
+  font-family: 'Roboto';
+  font-size: 15px;
+  color: #000000;
+  text-align: left;
+}
+
+.modalCaption-title {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  text-align: left;
+}
+/*# sourceMappingURL=styleModal.css.map */
