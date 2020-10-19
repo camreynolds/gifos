@@ -1,0 +1,122 @@
+@media all and (min-width:1200px) {
+    .sec-create-gifos {
+        width: 100%;
+        display: grid;
+        align-content: center;
+        justify-content: center;
+        grid-template-columns: 1fr 688px 1fr;
+        grid-template-rows: repeat(auto, 4);
+        grid-template-areas: "imgCam video imgCam2"
+            ". botones imgCam2"
+            "linea linea linea"
+            ". btnVideoAct .";
+    }
+
+    .div-img-container {
+        grid-area: imgCam;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .div-img-cam {
+            #cinta2 {
+                position: relative;
+                top: -120px;
+                left: 158px;
+            }
+
+            #cinta1 {
+                position: relative;
+                top: -110px;
+                left: 156px;
+
+            }
+
+            #luzImgCam {
+                width: 91px;
+                height: 151px;
+            }
+        }
+
+    }
+
+    .div-video-container {
+        grid-area: video;
+        width: 688px;
+        height: 390px;
+        @include themify($themes){
+            border: tema($border);
+        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .div-video-gifos {
+            width: 648px;
+            height: 350px;
+            border: 1px solid #50E3C2;
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            justify-content: center;
+
+            .h1-video {
+                font-size: 25px;
+                text-align: center;
+                line-height: 35px;
+            }
+
+            .p-video {
+
+                font-size: 16px;
+                font-family: 'Roboto';
+                font-weight: 500;
+                @include themify($themes){
+                    color:tema($text);
+                }
+                text-align: center;
+                line-height: 29px;
+            }
+
+            .sec-create-gifos-videos {
+                width: 480px;
+                height: 320px;
+            }
+        }
+    }
+
+    .div-img-cam2 {
+        margin-left: 67px;
+        grid-area: imgCam2;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+
+    .div-botones {
+        grid-area: botones;
+        height: 75px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .div-line-gifos {
+        grid-area: linea;
+        display: flex;
+        justify-content: center;
+        width: 796px;
+        height: 7px;
+        @include themify($themes){
+            background:tema($bg);
+        }
+    }
+
+    .div-btnvideo-gifos {
+        grid-area: btnVideoAct;
+        display: flex;
+        justify-content: center;
+
+    }
+
+}

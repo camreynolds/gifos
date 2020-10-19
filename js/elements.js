@@ -32,12 +32,14 @@ const handleCrearBtn = (p_class, p_event, p_id) => {
     return addbtn
 };
 
-const handleCrearImg = (p_src, p_alt, p_title, p_id, p_data_target, p_user) => {
+const handleCrearImg = (p_src, p_alt, p_title, p_id, p_data_target, p_user, p_offset,p_typePage) => {
     let imagenGrid = document.createElement('img');
     imagenGrid.setAttribute('id', p_id);
     imagenGrid.setAttribute('src', p_src);
     imagenGrid.setAttribute('data-target-img', p_data_target);
-    imagenGrid.setAttribute('data-target-username', p_user)
+    imagenGrid.setAttribute('data-target-username', p_user);
+    imagenGrid.setAttribute('data-target-offset', p_offset);
+    imagenGrid.setAttribute('data-type-page', p_typePage);
     if (p_alt !== null) imagenGrid.alt = p_alt;
     if (p_title !== null) imagenGrid.title = p_title;
     return imagenGrid;

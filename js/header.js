@@ -42,9 +42,36 @@ const handleCrearItemLi = (arrayItem) => {
         } else {
             a = handleCreateText('a', 'a-gifos', 'a-gifos' + i, arrayItem[i]);
             a.href = '#';
-            if (i===1){
-                a.addEventListener('click', createSectionFavorites);
+            switch (i) {
+                case 0:
+                    a.addEventListener('click', (e)=>{
+                        let bodydark=document.body.classList;
+                        if(a.innerHTML==='MODO NOCTURNO'){
+                            a.innerHTML='MODO DIURNO';
+                            bodydark.remove('theme-dark');
+                            bodydark.remove('theme-light');
+                            bodydark.add('theme-dark');
+
+                        }else{
+                            a.innerHTML='MODO NOCTURNO';
+                            bodydark.remove('theme-dark');
+                            bodydark.remove('theme-light');
+                            bodydark.add('theme-light');
+                        }
+
+                    });            
+                    break;
+                case 1:
+                    
+                    a.addEventListener('click', createSectionFavorites);            
+                    break;
+
+                default:
+                    break;
             }
+       /*      if (i===1){
+                a.addEventListener('click', createSectionFavorites);
+            } */
         }
 
         li.appendChild(a);

@@ -1,0 +1,60 @@
+$bg:'bg';
+$hover:'hover';
+$border:'border';
+$text:'text';
+$closeModal:'closeModal';
+$borderTopBottom:'borderTopBottom';
+$textModal:'textModal';
+$bgTrending:'bgTrending';
+$textBtn:'textBtn';
+$facebook:'facebook';
+$twitter:'twitter';
+$instagram:'instagram';
+$themes:(
+    light:(
+        bg:$bg--light,
+        text: $text--light,
+        border: $border--light,
+        hover:$hover--light,
+        closeModal: $closeModal--light,
+        borderTopBottom:$borderTopBottom--light,
+        textModal: #000000,
+        bgTrending: $bg-trending--light,
+        textBtn:#FFFFFF,
+        facebook:$face--light,
+        twitter:$twitter--light,
+        instagram:$instagram--light
+    ),
+    dark:(
+        bg:$bg--dark,
+        text: $text--dark,
+        border: $border--dark,
+        hover:$hover--dark,
+        closeModal:$closeModal--dark,
+        borderTopBottom:$borderTopBottom--dark,
+        textModal: #FFFFFF,
+        bgTrending: $bg-trending--dark,
+        textBtn:#000000,
+        facebook:$face--dark,
+        twitter:$twitter--dark,
+        instagram:$instagram--dark
+
+    )
+);
+ @mixin themify($themes) {
+    @each $theme, $map in $themes {
+      .theme-#{$theme} & {
+        $theme-map: () !global;
+        @each $key, $submap in $map {
+          $value: map-get(map-get($themes, $theme), '#{$key}');
+          $theme-map: map-merge($theme-map, ($key: $value)) !global;
+        }
+        @content;
+        $theme-map: null !global;
+      }
+    }
+  }
+  
+  @function tema($key) {
+    @return map-get($theme-map, $key);
+  }

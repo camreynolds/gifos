@@ -22,22 +22,27 @@
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    @include themify($themes) {
+        background-color: tema($bg);
+        border: tema($border);
+        //border: 1px solid #888;
+    }
+
     height: 100%;
     margin: 15% auto;
     /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
+
     width: 100%;
     /* Could be more or less, depending on screen size */
     display: grid;
     grid-template-columns: auto 695px auto;
     grid-template-rows: repeat(auto, 2);
     grid-template-areas: "modalH modalH modalH"
-        "modalPrev modalImg modalNext"
-        ". modalCap .";
+    "modalPrev modalImg modalNext"
+    ". modalCap .";
     grid-row-gap:22px;
-    grid-column-gap:25px ;
+    grid-column-gap:25px;
 }
 
 .modalHeader {
@@ -45,72 +50,96 @@
     grid-area: modalH;
     display: flex;
     justify-content: flex-end;
-    
-    .btnModalClose{
-        background: white;
-        background-image: url(../images/close.svg);
+
+  
+}
+
+.btnModalClose {
+ 
+    @include themify($themes) {
+        background: tema($bg);
+        background-image:tema($closeModal);
         background-repeat: no-repeat;
+        background-position: 50% 50%;
         width: 16px;
         height: 16px;
         cursor: pointer;
     }
+    
+  
 }
-.modal-btnprev{
-    grid-area:modalPrev ;
+
+
+.modal-btnprev {
+    grid-area: modalPrev;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
-.modalImg{
+
+.modalImg {
     width: 100%;
     grid-area: modalImg;
     display: flex;
     align-items: center;
     justify-content: center;
-    img{
-         width: 695px;
+
+    img {
+        width: 695px;
         height: 385px;
-        
+
     }
 }
-.modal-btnnext{
-    grid-area:modalNext ;
+
+.modal-btnnext {
+    grid-area: modalNext;
     display: flex;
     align-items: center;
 }
 
-.modalCaption{
+.modalCaption {
     grid-area: modalCap;
     display: flex;
     justify-content: space-between;
 }
 
-.modalCaption-text{
+.modalCaption-text {
     width: 80%;
     display: flex;
     align-content: space-between;
     flex-flow: column wrap;
 
 }
-.modalCaption-btn{
-   display: flex;
-   justify-content: flex-start;
 
+.modalCaption-btn {
+    display: flex;
+    justify-content: flex-start;
+    
     .btn-favorite,
-    .btn-download{
-        margin:unset;
+    .btn-download {
+        margin: unset;
+        border: 1px solid #CED7E1;
+    }
+    .btn-favorite{
+        margin-right: 21px;
     }
 }
-.modalCaption-user{
+
+.modalCaption-user {
     font-family: 'Roboto';
     font-size: 15px;
-    color: #000000;
+    @include themify($themes){
+        color: tema($textModal);
+    }
     text-align: left;
 }
-.modalCaption-title{
+
+.modalCaption-title {
     font-family: 'Roboto';
     font-size: 16px;
     font-weight: bold;
-    color: #000000;
+    @include themify($themes){
+        color: tema($textModal);
+    }
     text-align: left;
 }

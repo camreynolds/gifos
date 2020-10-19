@@ -12,7 +12,7 @@ let clickCount = 0;
 const handleSectionGifosHeader = () => {
     let sectionTagGifosHeader = handleCreateElement('section', 'gifos-header', 'gifos-header');
     let h1GifosHeader = handleCreateElement('h1', 'gf-h1', 'gf-h1');
-    let imgGifosHeader = handleCrearImg('../images/ilustra_header.svg', 'Ilustra Header', 'Ilustra Header', 'imgIlustra', 'ilustraHeader', 'IlustraHeader');
+    let imgGifosHeader = handleCrearImg('../images/ilustra_header.svg', 'Ilustra Header', 'Ilustra Header', 'imgIlustra', 'ilustraHeader', 'IlustraHeader',0,'IlustraHeader');
 
     h1GifosHeader.innerHTML = 'Inspírate, busca, guarda, y crea los mejores';
     sectionTagGifosHeader.appendChild(h1GifosHeader);
@@ -106,13 +106,28 @@ const handleFooter = () => {
     let footerTag = handleCreateElement('footer', 'foo-gifos', 'foo-gifos');
     let divTag=handleCreateElement('div','redsocial','redsocial');
     let pTag=handleCreateText('p','pcopy','pcopy','Compartir en:')
-    let redsocialFace=handleCrearImg('../images/icon_facebook.svg','Facebook','Facebook','idface','facebook','facebook');
+    const facebook=handleCreateText('a','a-facebook','a-facebook','');
+    facebook.href='https://www.facebook.com/';
+    facebook.target='_blank';
+    const redsocialFace=handleCrearImg('../images/icon_facebook.svg','Facebook','Facebook','idface','facebook','facebook',0,'facebook');
+    facebook.appendChild(redsocialFace);
+
     divTag.appendChild(pTag);
-    divTag.appendChild(redsocialFace);
-    let redsocialTwitter=handleCrearImg('../images/icon-twitter.svg','Twitter','Twitter','idtwitter','twitter','twitter');
-    divTag.appendChild(redsocialTwitter);
-    let redsocialInstagram=handleCrearImg('../images/icon_instagram.svg','Instagram','Instagram','idinstagram','instagram','instagram');
-    divTag.appendChild(redsocialInstagram);
+    divTag.appendChild(facebook);
+
+    const twitter=handleCreateText('a','a-twitter','a-twitter','');
+    twitter.href='https://twitter.com/';
+    twitter.target='_blank';
+    const redsocialTwitter=handleCrearImg('../images/icon-twitter.svg','Twitter','Twitter','idtwitter','twitter','twitter',0,'twitter');
+    twitter.appendChild(redsocialTwitter);
+    divTag.appendChild(twitter);
+
+    const instagram=handleCreateText('a','a-instagram','a-instagram','');
+    instagram.href='https://www.instagram.com/';
+    instagram.target='_blank';
+    const redsocialInstagram=handleCrearImg('../images/icon_instagram.svg','Instagram','Instagram','idinstagram','instagram','instagram',0,'instagram');
+    instagram.appendChild(redsocialInstagram)
+    divTag.appendChild(instagram);
     pTag=handleCreateText('p','pcopy','pcopy','© GIFOS 2020 All Rights Reserved.')
     footerTag.appendChild(divTag);
     footerTag.appendChild(pTag);

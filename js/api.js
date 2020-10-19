@@ -3,6 +3,7 @@ const urlPrincipal = 'https://api.giphy.com/v1/gifs';
 
 async function apiGiphy(url, params) {
     try {
+        
         const response = await fetch(url + `?api_key=${API_key}` + params);
 
         const json = await response.json();

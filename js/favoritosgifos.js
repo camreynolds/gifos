@@ -45,6 +45,7 @@ const createSectionFavorites = (favGifos) => {
         let pagination = handleCreateBtnPag();
         divBtnTag.appendChild(pagination);
         getFavorites('stg-grid-favorites', 'imgGrid', 1);
+        setBtnPaginationActives(1);
     }
 };
 
@@ -64,8 +65,15 @@ const handleCreateBtnPag = () => {
     let btnPrev = handleCreateElement('button', 'btn item-btn-pag', 'item-btn-page-prev');
     btnPrev.setAttribute('data-target', 'btn-pagination');
     btnPrev.innerHTML = '&lt';
-    btnPrev.addEventListener('mouseover', handleMouseOver);
-    btnPrev.addEventListener('mouseout', handleMouseOut);
+    btnPrev.addEventListener('mouseover', handleMouseOver,false);
+    btnPrev.addEventListener('mouseout', handleMouseOut,false);
+    btnPrev.addEventListener('click',(e)=>{
+        let idx=getBtnPaginationActivesIndex();
+        idx-=1
+        idx===0 ? 1 : idx;
+        getFavorites('stg-grid-favorites', 'imgGrid', idx);
+        setBtnPaginationActives(idx);
+    },false);
 
     liPrev.appendChild(btnPrev);
 
@@ -74,8 +82,14 @@ const handleCreateBtnPag = () => {
     let btnNext = handleCreateElement('button', 'btn item-btn-pag', 'item-btn-page-next');
     btnNext.setAttribute('data-target', 'btn-pagination');
     btnNext.innerHTML = '&gt';
-    btnNext.addEventListener('mouseover', handleMouseOver);
-    btnNext.addEventListener('mouseout', handleMouseOut);
+    btnNext.addEventListener('mouseover', handleMouseOver,false);
+    btnNext.addEventListener('mouseout', handleMouseOut,false);
+    btnNext.addEventListener('click',(e)=>{
+        let idx=parseInt(getBtnPaginationActivesIndex());
+        idx+=1;
+        getFavorites('stg-grid-favorites', 'imgGrid', idx);
+        setBtnPaginationActives(idx);
+    },false);
     liPrev.appendChild(btnPrev);
     ulBtn.appendChild(liPrev);
     for (let i = 0; i < cantBtn; i++) {
@@ -84,10 +98,12 @@ const handleCreateBtnPag = () => {
         let btnPage = handleCreateElement('button', 'btn item-btn-pag', 'item-btn-page-' + i);
         btnPage.setAttribute('data-target', 'btn-pagination');
         btnPage.innerHTML = i + 1;
-        btnPage.addEventListener('mouseover', handleMouseOver);
-        btnPage.addEventListener('mouseout', handleMouseOut);
+        btnPage.addEventListener('mouseover', handleMouseOver,false);
+        btnPage.addEventListener('mouseout', handleMouseOut,false);
         btnPage.addEventListener('click', (e) => {
             getFavorites('stg-grid-favorites', 'imgGrid', e.target.innerHTML);
+            btnPage.classList.toggle("actives");       
+            unsetBtnPaginationActives(btnPage.id);     
         });
         liBtn.appendChild(btnPage);
         ulBtn.appendChild(liBtn);
@@ -98,18 +114,7 @@ const handleCreateBtnPag = () => {
 };
 
 
-const f_gridImg_favorites = (datosJson) => {
-    // gridImg.innerHTML = '';  
-    let gridImg = elementId('stg-grid');
-    clickCount = clickCount + parseInt(datosJson.data.length);
 
-    for (let res of datosJson.data) {
-        let _img = handleCrearImgComplete(res.images.original.url, res.title, res.title, res.id);
-        gridImg.appendChild(_img);
-    }
-    if (clickCount >= paginationTotalCount) ocultarVerMas(true);
-
-};
 const numPerPages = 12;
 const getFavorites = (p_id, p_data_target, p_index_position) => {
     let gridImg = elementId(p_id);
@@ -119,18 +124,42 @@ const getFavorites = (p_id, p_data_target, p_index_position) => {
     for (let k = idxPos; k <= lengthLS; k++) {
         let v_key = localStorage.key(k);
         if (v_key === null) break;
-
         let res = JSON.parse(localStorage.getItem(v_key));
-        let addImg = handleCrearImgComplete(res.src, res.alt, res.title, res.id, p_data_target);
+        let addImg = handleCrearImgComplete(res.src, res.alt, res.title, res.id, p_data_target,res.user,k,'mainFavorites');
         gridImg.appendChild(addImg);
-
     }
 };
 
 
 
 const getInfoFavorites = (p_key) => {
-
     return JSON.parse(localStorage.getItem(p_key));
 };
+
+const unsetBtnPaginationActives=(p_id)=>{
+    return document.querySelectorAll("[data-target='btn-pagination']")
+    .forEach((item)=>{
+       if(item.id!==p_id &&(item.classList[3]==='actives'||item.classList[2]==='actives'))
+          item.classList.remove("actives");
+    });
+}
+const getBtnPaginationActivesIndex=()=>{
+    let idx
+    document.querySelectorAll("[data-target='btn-pagination']").forEach((item)=>{
+        if(item.classList[3]==='actives'||item.classList[2]==='actives')         
+            idx=item.innerHTML;
+    });
+    return idx;
+};
+
+const setBtnPaginationActives=(p_id)=>{
+    return document.querySelectorAll("[data-target='btn-pagination']").forEach((item)=>{
+        if(p_id===parseInt(item.innerHTML)){
+            item.classList.toggle("actives");
+            unsetBtnPaginationActives(item.id);
+            console.log(p_id,item.id);
+        }
+    });
+};
+
 /*********************************************************/

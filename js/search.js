@@ -1,3 +1,11 @@
+/* const handleGetSearchImgPrevNextOneByOne= async  (pageSearch,pageOffset)=>{
+    let url = `${urlPrincipal}/search`
+    let param = `&q=${pageSearch}&limit=1&offset=${pageOffset}`;
+    const results= await  apiGiphy(url,param);
+    console.log('handleGetSearchImgPrevNextOneByOne',results.data);
+    return results.data;
+} */
+
 const handlerSearchAsync = async (pageSearch, pageOffset) => {
 
     let gridImg = elementId('search-trending-gifos');
@@ -25,8 +33,8 @@ const handlerSearchAsync = async (pageSearch, pageOffset) => {
                     removeElementId('img-notfound');
                     paginationTotalCount = res.pagination.total_count;
                 }
-
-                f_gridImg(res);
+                
+                f_gridImg(res,pageOffset);
             }
         })
         .catch(error => {
@@ -63,11 +71,10 @@ const handleAutocompleteSearch = (value) => {
             removeElementId('li-autocomplete');
             for (result of data) {
                 let liTag = handleCreateElement('li', 'li-autocomplete', 'li-autocomplete');
-                imgSearch = handleCrearImg('../images/icon-search-1.svg', result.name, 'Lupa', 'imgsearch', 'imgsearch', 'lupa');
+                imgSearch = handleCrearImg('../images/icon-search-1.svg', result.name, 'Lupa', 'imgsearch', 'imgsearch', 'lupa',0,'mainAutocomplete');
 
                 let aTag = handleCreateText('a', 'a-autocomplete', 'a-autocomplete', result.name);
                 aTag.addEventListener('click', (e) => {
-                    console.log(e);
                     let textValue = e.target.text || e.target.alt || e.target.innerText;
                     handleKeyPressIntro(textValue);
                     removeElementId('ul-autocomplete');
@@ -98,6 +105,7 @@ const handleAutocompleteSearch = (value) => {
 
 
 const handleKeyPressIntro=(value) =>{
+    
     let stgTitle = elementId('stg-title');
     stgTitle.innerHTML = value
     //document.getElementById('stg-title').innerHTML = values;
@@ -120,14 +128,19 @@ const getTrendingGifos = (p_id) => {
             let divTag = elementId(p_id);
             let ulTag = handleCreateElement('ul', 'ul-slider', 'ul-slider');
             ulTag.setAttribute('data-target', 'sliderUL');
-
+            let  paginas=0;
             for (let img of data) {
                 let liTag = handleCreateElement('li', 'li-slider', 'li-slider');
                 liTag.setAttribute('data-slider', 'sliderFAV');
-                let addImg = handleCrearImgComplete(img.images.original.url, img.title, img.title, img.id, 'gallery', img.username);
+                paginas+=1;
+                let classDataImage = new DataImage(img.id, img.images.original.url, img.title, img.title, img.username,paginas-1,'mainTrending');
+                saveSessionStorage(classDataImage);
+                
+                let addImg = handleCrearImgComplete(img.images.original.url, img.title, img.title, img.id, 'gallery', img.username,paginas-1,'mainTrending');
                 liTag.appendChild(addImg);
                 ulTag.appendChild(liTag);
             }
+           
             divTag.appendChild(ulTag);
 
             carouselImg();

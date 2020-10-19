@@ -1,0 +1,208 @@
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto', sans-serif; */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+
+    @include themify($themes) {
+        background: tema($bg);
+    }
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Montserrat';
+    font-weight: bold;
+
+    @include themify($themes) {
+        color: tema($text);
+    }
+
+    text-align: center;
+}
+
+p {
+    font-family: 'Montserrat';
+    font-weight: 500;
+
+    @include themify($themes) {
+        color: tema($text);
+    }
+
+    text-align: center;
+}
+
+#contenedor-principal {
+    @include themify($themes) {
+        background: tema($bg);
+    }
+}
+
+
+.stg-container-img {
+    display: flex;
+    flex-flow: column-reverse;
+
+}
+
+
+.imgHover {
+
+    opacity: 0.7;
+    //z-index: 3;
+    background: #572EE5;
+}
+
+div[data-stgcont-btns='imgGridbtn'],
+div[data-stgcont-btns='gallerybtn'] {
+    display: grid;
+    grid-template-columns: 1fr repeat(3, 45px);
+    grid-template-rows: 45px 1fr 18px 45px;
+    grid-template-areas: ". favdel download open"". . . ."" username username username username""title title title title";
+    align-content: center;
+    grid-row-gap: 10px;
+    z-index: 3;
+    width: 100%;
+
+    .btn-favorite,
+    .btn-download,
+    .btn-open {
+        border: 1px solid #CED7E1;
+    }
+
+    .btn-favorite {
+        margin-top: 10px;
+        grid-area: favdel;
+    }
+
+    .btn-download {
+        margin-top: 10px;
+        grid-area: download;
+    }
+
+    .btn-open {
+        margin-top: 10px;
+        margin-right: 10px;
+        grid-area: open;
+    }
+
+    .p-username, .p-title {
+        margin-left: 13px;
+        color:white;
+        font-family: 'Roboto', sans-serif;
+        text-align: unset;
+        /* @include themify($themes) {
+            color: tema($text);
+        } */
+    }
+
+
+    .p-username {
+        grid-area: username;
+        font-weight: 400;
+        font-size: 15px;       
+    }
+
+    .p-title {       
+        margin-bottom: 15px;
+        grid-area: title;
+        font-weight: 700;
+        font-size: 16px;
+    }
+}
+
+.btn {
+
+    @include themify($themes) {
+        background: tema($bg);
+        color: tema($text);
+    }
+
+    transition-duration: 0.4s;
+    cursor: pointer;
+
+}
+
+
+
+#btnprev,
+#btnnext {
+    @include themify($themes) {
+        border: tema($border);
+    }
+
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    font-family: 'Roboto';
+
+    &:hover {
+        @include themify($themes) {
+            background: tema($hover);
+            color: tema($textBtn);
+        }
+
+    }
+}
+
+.btnvermas {
+    margin: 78px 0px 79px 0px;
+    width: 127px;
+    height: 50px;
+
+    @include themify($themes) {
+        background-color: tema($bg);
+        color: tema($text);
+        border: tema($border);
+    }
+
+    border-radius: 25px;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0;
+
+    &:hover {
+        @include themify($themes) {
+            background: tema($hover);
+            color: tema($textBtn);
+        }
+    }
+}
+
+.btnvideo {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    font-family: 'Roboto';
+    font-weight: 500;
+
+    text-align: center;
+    border-radius: 100%;
+
+    @include themify($themes) {
+        border: tema($border);
+        color: tema($text);
+    }
+}
+
+.actives {
+    @include themify($themes) {
+        background: tema($hover);
+        color: tema($text);
+    }
+}
