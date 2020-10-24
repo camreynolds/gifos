@@ -1,16 +1,21 @@
-
+$color--ligth: #572EE5;
 
 //LIGHT
 $bg--light:#FFFFFF;
 $bg-trending--light: #F3F5F8;
-$border--light: 1px solid #572EE5;
-$hover--light: #572EE5;
-$text--light:#572EE5;
+$border--light: 1px solid $color--ligth;
+$hover--light: $color--ligth;
+$text--light:$color--ligth;
 $closeModal--light: url(../images/close.svg);
-$borderTopBottom--light:5px solid #572EE5;
+$borderTopBottom--light:5px solid $color--ligth;
 $face--light:url(../images/icon_facebook.svg);
 $twitter--light:url(../images/icon-twitter.svg);
 $instagram--light:url(../images/icon_instagram.svg);
+$burger--light:url(../images/burger.svg);
+$burger-close--light:url(../images/button-close.svg);
+$bgmenu--light:  rgba(87,46,229,0.90);
+$bg-line--light:$color--ligth;
+
 
 
 //DARK
@@ -24,6 +29,10 @@ $borderTopBottom--dark:5px solid #FFFFFF;
 $face--dark:url(../images/icon_facebook_noc.svg);
 $twitter--dark:url(../images/icon_twitter_noc.svg);
 $instagram--dark:url(../images/icon_instagram_noc.svg);
+$burger--dark:url(../images/burger-modo-noct.svg);
+$burger-close--dark:url(../images/close-modo-noct.svg);
+$bgmenu--dark: #000000;
+$bg-line--dark:#FFFFFF;
 
 
 //FUENTES

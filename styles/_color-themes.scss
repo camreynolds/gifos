@@ -10,6 +10,11 @@ $textBtn:'textBtn';
 $facebook:'facebook';
 $twitter:'twitter';
 $instagram:'instagram';
+$burger:'burger';
+$bgmenu:'bgmenu';
+$burgerClose:'burgerClose';
+$bgLineGifos:'bgLineGifos';
+
 $themes:(
     light:(
         bg:$bg--light,
@@ -23,7 +28,11 @@ $themes:(
         textBtn:#FFFFFF,
         facebook:$face--light,
         twitter:$twitter--light,
-        instagram:$instagram--light
+        instagram:$instagram--light,
+        burger:$burger--light,
+        burgerClose:$burger-close--light,
+        bgmenu:$bgmenu--light,
+        bgLineGifos:$bg-line--light
     ),
     dark:(
         bg:$bg--dark,
@@ -37,8 +46,11 @@ $themes:(
         textBtn:#000000,
         facebook:$face--dark,
         twitter:$twitter--dark,
-        instagram:$instagram--dark
-
+        instagram:$instagram--dark,
+        burger:$burger--dark,
+        burgerClose:$burger-close--dark,
+        bgmenu:$bgmenu--dark,
+        bgLineGifos:$bg-line--dark
     )
 );
  @mixin themify($themes) {

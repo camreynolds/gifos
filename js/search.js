@@ -33,8 +33,8 @@ const handlerSearchAsync = async (pageSearch, pageOffset) => {
                     removeElementId('img-notfound');
                     paginationTotalCount = res.pagination.total_count;
                 }
-                
-                f_gridImg(res,pageOffset);
+
+                f_gridImg(res, pageOffset);
             }
         })
         .catch(error => {
@@ -71,7 +71,7 @@ const handleAutocompleteSearch = (value) => {
             removeElementId('li-autocomplete');
             for (result of data) {
                 let liTag = handleCreateElement('li', 'li-autocomplete', 'li-autocomplete');
-                imgSearch = handleCrearImg('../images/icon-search-1.svg', result.name, 'Lupa', 'imgsearch', 'imgsearch', 'lupa',0,'mainAutocomplete');
+                imgSearch = handleCrearImg('../images/icon-search-1.svg', result.name, 'Lupa', 'imgsearch', 'imgsearch', 'lupa', 0, 'mainAutocomplete');
 
                 let aTag = handleCreateText('a', 'a-autocomplete', 'a-autocomplete', result.name);
                 aTag.addEventListener('click', (e) => {
@@ -104,8 +104,8 @@ const handleAutocompleteSearch = (value) => {
 }
 
 
-const handleKeyPressIntro=(value) =>{
-    
+const handleKeyPressIntro = (value) => {
+
     let stgTitle = elementId('stg-title');
     stgTitle.innerHTML = value
     //document.getElementById('stg-title').innerHTML = values;
@@ -117,6 +117,16 @@ const handleKeyPressIntro=(value) =>{
     handlerSearchAsync(value, 0);
 };
 
+const getGiphyID=(p_id)=>{
+    let url = `${urlPrincipal}/`;
+    let param = p_id;
+    const gif=apiGiphy(url+param,'');
+    gif.then( res=> console.log(res))
+    .catch(error => console.log(error));
+}
+
+
+console.log('getGiphyID',getGiphyID('xTiTnwiIYbdf0pirKM'));
 
 const getTrendingGifos = (p_id) => {
     let url = `${urlPrincipal}/trending`;
@@ -128,19 +138,18 @@ const getTrendingGifos = (p_id) => {
             let divTag = elementId(p_id);
             let ulTag = handleCreateElement('ul', 'ul-slider', 'ul-slider');
             ulTag.setAttribute('data-target', 'sliderUL');
-            let  paginas=0;
+            let paginas = 0;
             for (let img of data) {
                 let liTag = handleCreateElement('li', 'li-slider', 'li-slider');
                 liTag.setAttribute('data-slider', 'sliderFAV');
-                paginas+=1;
-                let classDataImage = new DataImage(img.id, img.images.original.url, img.title, img.title, img.username,paginas-1,'mainTrending');
+                paginas += 1;
+                let classDataImage = new DataImage(img.id, img.images.original.url, img.title, img.title, img.username, paginas - 1, 'mainTrending');
                 saveSessionStorage(classDataImage);
-                
-                let addImg = handleCrearImgComplete(img.images.original.url, img.title, img.title, img.id, 'gallery', img.username,paginas-1,'mainTrending');
+                let addImg = handleCrearImgComplete(img.images.original.url, img.title, img.title, img.id, 'gallery', img.username, paginas - 1, 'mainTrending');
                 liTag.appendChild(addImg);
                 ulTag.appendChild(liTag);
             }
-           
+
             divTag.appendChild(ulTag);
 
             carouselImg();
@@ -163,26 +172,31 @@ const carouselImg = () => {
     const sliderCount = carousel.querySelectorAll("[data-slider='sliderFAV'").length;
 
     let offset = 0;
-    const maxLimit = -((sliderCount / 3) * carouselWidth +
-        (sliderMarginRight * (sliderCount / 3)) -
+    const count = isMediaQuerieMobile() === true ? 1 : 3;
+
+    const maxLimit = -((sliderCount / count) * carouselWidth +
+        (sliderMarginRight * (sliderCount / count)) -
         carouselWidth - sliderMarginRight);
 
 
-    const leftButton = document.querySelector("[data-action='slidePrev']");
-    const rightButton = document.querySelector("[data-action='slideNext']");
+ 
 
-    leftButton.addEventListener("click", () => {
-        if (offset !== 0) {
-            offset += carouselWidth + sliderMarginRight;
-            carousel.style.transform = `translateX(${offset}px)`;
-        }
-    });
+    if (isMediaQuerieMobile() === false) {
+        const leftButton = document.querySelector("[data-action='slidePrev']");
+        const rightButton = document.querySelector("[data-action='slideNext']");
+        leftButton.addEventListener("click", () => {
+            if (offset !== 0) {
+                offset += carouselWidth + sliderMarginRight;
+                carousel.style.transform = `translateX(${offset}px)`;
+            }
+        });
 
-    rightButton.addEventListener("click", () => {
-        if (offset >= maxLimit) {
+        rightButton.addEventListener("click", () => {
+            if (offset >= maxLimit) {
 
-            offset -= carouselWidth + sliderMarginRight;
-            carousel.style.transform = `translateX(${offset}px)`;
-        }
-    });
+                offset -= carouselWidth + sliderMarginRight;
+                carousel.style.transform = `translateX(${offset}px)`;
+            }
+        });
+    }
 };

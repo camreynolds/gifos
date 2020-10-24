@@ -82,9 +82,13 @@ const handleSTGGRID = () => {
 const handleSectionTrendingGifosSlide = () => {
     let sectionTGS = handleCreateElement('section', 'sec-tgs', 'sec-tgs');
     let h3TGS = handleCreateText('h3', 'h3-tgs', 'h3-tgs', 'Trending GIFOS');
-    let pTagTGS = handleCreateText('p', 'p-tgs', 'p-tgs', 'Mira los últimos GIFO de nuestra comunidad.');
+    let pTagTGS = handleCreateText('p', 'p-tgs', 'p-tgs', 'Mira los últimos GIFOS de nuestra comunidad.');
     let divTGS = handleCreateElement('div', 'div-tgs', 'div-tgs');
     let divGallery = handleCreateElement('div', 'div-gallery', 'div-gallery');
+ /*     if (isMediaQuerieMobile()===true){
+        divGallery.addEventListener('touchmove', console.log('holaa touchmove'));
+    }  */
+
     let btnPrev = handleCreateElement('button', 'btn btnprev', 'btnprev');
     btnPrev.setAttribute('data-action', 'slidePrev');
     btnPrev.innerHTML = '&lt;';
@@ -105,7 +109,8 @@ const handleSectionTrendingGifosSlide = () => {
 const handleFooter = () => {
     let footerTag = handleCreateElement('footer', 'foo-gifos', 'foo-gifos');
     let divTag=handleCreateElement('div','redsocial','redsocial');
-    let pTag=handleCreateText('p','pcopy','pcopy','Compartir en:')
+    let divRed=handleCreateElement('div','subredsocial','subredsocial');
+    let pTag=handleCreateText('p','pcompartir','pcompartir','Compartir en:');
     const facebook=handleCreateText('a','a-facebook','a-facebook','');
     facebook.href='https://www.facebook.com/';
     facebook.target='_blank';
@@ -113,21 +118,22 @@ const handleFooter = () => {
     facebook.appendChild(redsocialFace);
 
     divTag.appendChild(pTag);
-    divTag.appendChild(facebook);
+    divRed.appendChild(facebook);
 
     const twitter=handleCreateText('a','a-twitter','a-twitter','');
     twitter.href='https://twitter.com/';
     twitter.target='_blank';
     const redsocialTwitter=handleCrearImg('../images/icon-twitter.svg','Twitter','Twitter','idtwitter','twitter','twitter',0,'twitter');
     twitter.appendChild(redsocialTwitter);
-    divTag.appendChild(twitter);
+    divRed.appendChild(twitter);
 
     const instagram=handleCreateText('a','a-instagram','a-instagram','');
     instagram.href='https://www.instagram.com/';
     instagram.target='_blank';
     const redsocialInstagram=handleCrearImg('../images/icon_instagram.svg','Instagram','Instagram','idinstagram','instagram','instagram',0,'instagram');
     instagram.appendChild(redsocialInstagram)
-    divTag.appendChild(instagram);
+    divRed.appendChild(instagram);
+    divTag.appendChild(divRed);
     pTag=handleCreateText('p','pcopy','pcopy','© GIFOS 2020 All Rights Reserved.')
     footerTag.appendChild(divTag);
     footerTag.appendChild(pTag);
@@ -155,6 +161,10 @@ contenedorPrincipal.innerHTML='';
     contenedorPrincipal.appendChild(footerTag);
 
     getTrendingGifos('div-gallery');
+    let bodydark=document.body.classList;
+        bodydark.remove('theme-dark');
+        bodydark.remove('theme-light');
+        bodydark.add('theme-light');
 
 };
 
@@ -162,4 +172,6 @@ contenedorPrincipal.innerHTML='';
 /********************************************************************************/
 (() => {
     handleCreateStartPage();
+    
 })();
+

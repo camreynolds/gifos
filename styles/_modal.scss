@@ -4,7 +4,7 @@
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
-    z-index: 1;
+    z-index: 6;
     /* Sit on top */
     left: 0;
     top: 0;
@@ -29,29 +29,27 @@
     }
 
     height: 100%;
-    margin: 15% auto;
+    margin: 0 auto;
     /* 15% from the top and centered */
     padding: 20px;
 
     width: 100%;
     /* Could be more or less, depending on screen size */
     display: grid;
-    grid-template-columns: auto 695px auto;
-    grid-template-rows: repeat(auto, 2);
-    grid-template-areas: "modalH modalH modalH"
-    "modalPrev modalImg modalNext"
-    ". modalCap .";
-    grid-row-gap:22px;
-    grid-column-gap:25px;
+    grid-template-columns: 318px ;
+    grid-template-rows: 100px 245px 183px;
+    grid-template-areas: "modalH"
+    "modalImg "
+    "modalCap";
+    grid-row-gap:14px;
+    justify-content: center;
 }
 
 .modalHeader {
     width: 100%;
     grid-area: modalH;
     display: flex;
-    justify-content: flex-end;
-
-  
+    justify-content: flex-end; 
 }
 
 .btnModalClose {
@@ -70,11 +68,8 @@
 }
 
 
-.modal-btnprev {
-    grid-area: modalPrev;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.modal-btnprev,.modal-btnnext {
+    display: none;
 }
 
 .modalImg {
@@ -83,24 +78,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    height: 245px;
     img {
-        width: 695px;
-        height: 385px;
+        width: 318px;
+        height: 245px;
 
     }
 }
 
-.modal-btnnext {
-    grid-area: modalNext;
-    display: flex;
-    align-items: center;
-}
+
 
 .modalCaption {
     grid-area: modalCap;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;    
 }
 
 .modalCaption-text {
@@ -142,4 +133,38 @@
         color: tema($textModal);
     }
     text-align: left;
+}
+
+@media all and (min-width:1200px) {
+    .modal-content {
+    grid-template-columns: auto 695px auto;
+    grid-template-rows: 160px 385px 223px;
+    grid-template-areas: "modalH modalH modalH"
+    "modalPrev modalImg modalNext"
+    ". modalCap .";
+    grid-row-gap:22px;
+    grid-column-gap:25px;
+    }
+    .modal-btnprev {
+        grid-area: modalPrev;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 385px;
+    }
+    .modalImg {
+        height: 385px;
+        img {
+            width: 695px;
+            height: 385px;
+       
+        }
+    }   
+    .modal-btnnext {
+        grid-area: modalNext;
+        display: flex;
+        align-items: center;
+        height: 385px;
+    }
+    
 }

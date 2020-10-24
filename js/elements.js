@@ -44,3 +44,22 @@ const handleCrearImg = (p_src, p_alt, p_title, p_id, p_data_target, p_user, p_of
     if (p_title !== null) imagenGrid.title = p_title;
     return imagenGrid;
 };
+
+const getMediaQuerie=()=>{
+ let res=(isMediaQuerieMobile()===true || isMediaQuerieTablet()===true) ? 'MOBILE':'DESKTOP';
+return res;
+};
+
+const isMediaQuerieMobile=()=>{
+   return mediaquerie=window.matchMedia("(min-width: 320px) and (max-width:767px)").matches;
+};
+
+const isMediaQuerieTablet=()=>{
+    return mediaquerie=window.matchMedia("(min-width: 768px) and (max-width:1199px)").matches;
+ };
+
+ const isMediaQuerieDesktop=()=>{
+    return mediaquerie=window.matchMedia("(min-width: 1200px)").matches;
+ };
+
+
