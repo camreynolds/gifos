@@ -13,10 +13,10 @@ const createSectionFavorites = (favGifos) => {
     
     const countLocalStorage= favGifos==='GIFOS'? getCountLocalStoragesGifos():getCountLocalStoragesFavorites() ;
     if (favGifos==='GIFOS'){
-        imgGifosHeader = handleCrearImg('../images/icon-mis-gifos.svg', 'Mis GIFOS', 'Mis GIFOS', 'imgGifos', 'misGifos', 'misGifos');
+        imgGifosHeader = handleCrearImg('images/icon-mis-gifos.svg', 'Mis GIFOS', 'Mis GIFOS', 'imgGifos', 'misGifos', 'misGifos');
         h2Tag.innerHTML = 'Mis GIFOS';
     }else{
-        imgGifosHeader = handleCrearImg('../images/icon-favoritos.svg', 'Favoritos', 'Favoritos', 'imgFavoritos', 'favorites', 'favorites');
+        imgGifosHeader = handleCrearImg('images/icon-favoritos.svg', 'Favoritos', 'Favoritos', 'imgFavoritos', 'favorites', 'favorites');
         h2Tag.innerHTML = 'Favoritos';
     }
 
@@ -51,7 +51,7 @@ const createSectionFavorites = (favGifos) => {
         }else{
              p_textNode = '"¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"';
         }
-        sectionTag.appendChild(f_searchNotFound('../images/icon-fav-sin-contenido.svg', p_textNode));
+        sectionTag.appendChild(f_searchNotFound('images/icon-fav-sin-contenido.svg', p_textNode));
     } else {
         let divBtnTag = elementId('stg-btnvermas-favorites');
         const typePage=getTypePageGifosFavorites(favGifos);

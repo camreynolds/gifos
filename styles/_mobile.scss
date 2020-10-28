@@ -614,7 +614,7 @@ footer {
             background-image: tema($facebook);
 
             &:hover {
-                content: url('../images/icon_facebook_hover.svg');
+                content: url('images/icon_facebook_hover.svg');
             }
         }
 
@@ -626,7 +626,7 @@ footer {
             background-image: tema($twitter);
 
             &:hover {
-                content: url('../images/icon-twitter-hover.svg');
+                content: url('images/icon-twitter-hover.svg');
             }
         }
     }
@@ -637,7 +637,7 @@ footer {
             background-image: tema($instagram);
 
             &:hover {
-                content: url('../images/icon_instagram-hover.svg');
+                content: url('images/icon_instagram-hover.svg');
             }
         }
     }

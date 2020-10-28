@@ -24,7 +24,7 @@ const handlerSearchAsync = async (pageSearch, pageOffset) => {
                 removeElementId('stg-btnvermas');
 
                 clickCount = 0;
-                let p_srcImg = '../images/icon-busqueda-sin-resultado.svg';
+                let p_srcImg = 'images/icon-busqueda-sin-resultado.svg';
                 gridImg.appendChild(f_searchNotFound(p_srcImg, 'Intenta con otra búsqueda.'));
 
             } else {
@@ -58,7 +58,7 @@ const handleAutocompleteSearch = (value) => {
     let divSgLine = handleCreateElement('div', 'sg-line-search', 'sg-line-search');
     sgContainerSearch.appendChild(divSgLine);
     let ulTag = handleCreateElement('ul', 'ul-autocomplete', 'ul-autocomplete');
-    let imgSearch = handleCrearImg('../images/icon-search-1.svg', 'Lupa', 'Lupa', 'imgsearch-1', 'imgsearch-1', 'lupa');
+    let imgSearch = handleCrearImg('images/icon-search-1.svg', 'Lupa', 'Lupa', 'imgsearch-1', 'imgsearch-1', 'lupa');
     imgSearch.addEventListener('click', (e) => {
         let inputSearch = document.getElementById('gifos-header-search').value;
         handleKeyPressIntro(inputSearch);
@@ -77,7 +77,7 @@ const handleAutocompleteSearch = (value) => {
             removeElementId('li-autocomplete');
             for (result of data) {
                 let liTag = handleCreateElement('li', 'li-autocomplete', 'li-autocomplete');
-                imgSearch = handleCrearImg('../images/icon-search-1.svg', result.name, 'Lupa', 'imgsearch', 'imgsearch', 'lupa', 0, 'mainAutocomplete');
+                imgSearch = handleCrearImg('images/icon-search-1.svg', result.name, 'Lupa', 'imgsearch', 'imgsearch', 'lupa', 0, 'mainAutocomplete');
 
                 let aTag = handleCreateText('a', 'a-autocomplete', 'a-autocomplete', result.name);
                 aTag.addEventListener('click', (e) => {

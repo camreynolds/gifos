@@ -78,14 +78,14 @@ const handleCreateGIFOS = () => {
     let divbtnVideoAct = handleCreateElement('div', 'div-btnvideo-gifos', 'div-btnvideo-gifos');
     let addImg;
 
-    addImg = handleCrearImg('../images/camara.svg', 'Cámara', 'Cámara', 'imgCam', 'camara', '');
+    addImg = handleCrearImg('images/camara.svg', 'Cámara', 'Cámara', 'imgCam', 'camara', '');
     divImgCam.appendChild(addImg);
-    addImg = handleCrearImg('../images/element-luz-camara.svg', 'Cámara', 'Cámara', 'luzImgCam', 'luzCam', '');
+    addImg = handleCrearImg('images/element-luz-camara.svg', 'Cámara', 'Cámara', 'luzImgCam', 'luzCam', '');
 
     divImgCam.appendChild(addImg);
     divImgCon.appendChild(divImgCam);
 
-    addImg = handleCrearImg('../images/pelicula.svg', 'Cámara', 'Cámara', 'imgCam2', 'camara', '');
+    addImg = handleCrearImg('images/pelicula.svg', 'Cámara', 'Cámara', 'imgCam2', 'camara', '');
     divImgCam2.appendChild(addImg);
 
     let botonera = handleCreateElement('div', 'botoneraGifos', 'botoneraGifos')
@@ -170,7 +170,7 @@ const btnSubirGifo = () => {
             recorder.destroy;
             recorder = null;
         }
-        uploadGifoText('../images/loader.svg', 'Estamos subiendo tu GIFO.')
+        uploadGifoText('images/loader.svg', 'Estamos subiendo tu GIFO.')
         removeElementId('repetircaptura');
         elementId('sec-create-gifos-canvas').classList.toggle("sec-create-gifos-canvas-up");
 
@@ -179,7 +179,7 @@ const btnSubirGifo = () => {
             .then(res=>{
                 let classDataImage = new DataImage(res.id, res.images.original.url, res.title, res.title, res.username, 0, 'mainGifos');
                 saveLocalStorageGifos(classDataImage);
-                uploadGifoText('../images/ok.svg','GIFO subido con éxito.');
+                uploadGifoText('images/ok.svg','GIFO subido con éxito.');
                 let btnDownload=btnDownloadGifos(res.id);
                 btnDownload.setAttribute('data-download-gif',res.images.original.url);
                 elementId('sec-create-gifos-canvas-div').appendChild(btnDownload);
@@ -198,7 +198,7 @@ const btnSubirGifo = () => {
                     .then(res => {
                         let classDataImage = new DataImage(res.id, res.images.original.url, res.title, res.title, res.username, 0, 'mainGifos');
                         saveLocalStorageGifos(classDataImage);
-                        uploadGifoText('../images/ok.svg', 'GIFO subido con éxito.');
+                        uploadGifoText('images/ok.svg', 'GIFO subido con éxito.');
                         let btnDownload = btnDownloadGifos(res.id);
                         btnDownload.setAttribute('data-download-gif', res.images.original.url);
                         elementId('sec-create-gifos-canvas-div').appendChild(btnDownload);
