@@ -10,6 +10,10 @@ const saveLocalStorage = (data) => {
     return localStorage.setItem(data.id, JSON.stringify(data));
 };
 
+const saveLocalStorageGifos = (data) => {
+    return localStorage.setItem(lsGIFOS+data.id, JSON.stringify(data));
+};
+
 const removeLocalStorage = (p_key) => {
     return localStorage.removeItem(p_key);
 };

@@ -46,7 +46,6 @@ const handleHeader = () => {
             divBurger.classList.remove("menuClose");
             menu.style.display="none";
         }
-
     },false);
 
     divLogoTitle.appendChild(pGifos);

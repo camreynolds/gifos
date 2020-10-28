@@ -41,7 +41,7 @@ const handleCrearImgComplete = (p_src, p_alt, p_title, p_id, p_data_target, p_us
     let imagenGrid = handleCrearImg(p_src, p_alt, p_title, p_id, p_data_target, p_user, p_offset, p_typePage);
     if (getMediaQuerie() === 'DESKTOP') {
         divGrid.addEventListener('mouseenter', (e) => {
-            handleCreateButtonFDO(divGrid, p_data_target, p_id, p_user, p_title,p_src);
+            handleCreateButtonFDO(divGrid, p_data_target, p_id, p_user, p_title,p_src,p_typePage);
             divGrid.classList.add("imgHover");
         }, false);
 
@@ -88,6 +88,7 @@ const handleFavorite = (e) => {
         saveLocalStorage(classDataImage);
     } else {
         removeLocalStorage(e.dataset.favoriteId);
+        removeElementId('modal');
     }
 };
 
@@ -101,7 +102,7 @@ const handleOpen = (p_id) => {
     let imgModal = elementId(v_key);
     let dataImg = new DataImage(imgModal.id, imgModal.src, imgModal.alt, imgModal.title, imgModal.dataset.targetUsername, imgModal.dataset.targetOffset, imgModal.dataset.typePage);
     modalImg = dataImg;
-    handleModal(modalImg, 'modalImage');
+    handleModal(modalImg, 'modalImage',imgModal.dataset.typePage);
 };
 
 const handleGetSearchImgPrevNextOneByOne = (typePageSearch, pageOffset) => {
@@ -126,10 +127,10 @@ const handleModalPrevNext = (offset, typeSearch, p_id, p_button) => {
             break;
     }
     removeElementId('modal');
-    handleModal(img, 'modalImage');
+    handleModal(img, 'modalImage',typeSearch);
 };
 
-const handleModal = (p_modalImg, p_data_target) => {
+const handleModal = (p_modalImg, p_data_target,p_typePage) => {
     let divmodal = handleCreateElement('div', 'modal', 'modal')
     let divmodalContent = handleCreateElement('div', 'modal-content', 'modal-content');
     let divmodalHeader = handleCreateElement('div', 'modalHeader', 'modalHeader');
@@ -175,8 +176,9 @@ const handleModal = (p_modalImg, p_data_target) => {
     divMCText.appendChild(modalTitle);
     let divMCButton = handleCreateElement('div', 'modalCaption-btn', 'MCB:' + p_modalImg.id);
     divMCButton.setAttribute('data-favorite-active', 'FAVOPEN:' + p_modalImg.id);
-    let btnFavorite = handleBtnFavorite('FAVOPEN:' + p_modalImg.id);
-        btnFavorite.setAttribute('data-favorite-id',p_modalImg.id);
+    let btnFavorite = btnFavoriteDelete(p_typePage,p_modalImg.id,true);/* handleBtnFavorite('FAVOPEN:' + p_modalImg.id);
+        btnFavorite.setAttribute('data-favorite-id',p_modalImg.id); */
+
     let btnDownload = handleBtnDownload(p_modalImg.id); //handleCrearBtn('btn-principal btn-download', 'handleDownload(this)', 'DOWNLOAD:' + p_modalImg.id);
         btnDownload.setAttribute('data-download-gif',p_modalImg.src);
     divMCButton.appendChild(btnFavorite);

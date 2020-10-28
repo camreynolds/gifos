@@ -5,7 +5,12 @@
         grid-template-columns: 156px auto 5fr 5fr 156px;
         grid-template-rows: 90px;
         grid-template-areas: ". logo search menu .";
+      
     }
+
+   /*  .header-gifos>.sg-container-search{
+        grid-area: search;
+    } */
 
     .logo {
         width: 59.1px;

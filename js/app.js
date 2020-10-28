@@ -1,3 +1,4 @@
+"use strict";
 let contenedorPrincipal = document.querySelector('#contenedor-principal');
 
 //Cuantos elementos se muestra por página
@@ -21,9 +22,7 @@ const handleSectionGifosHeader = () => {
     return sectionTagGifosHeader
 };
 
-
-const handleSectionSearchGifo = () => {
-    let sectionTagSearchGifos = handleCreateElement('section', 'searchgifos', 'searchgifos');
+const handleCreateInputSearch=()=>{
     let divsgContainerSearch = handleCreateElement('div', 'sg-container-search', 'sg-container-search');
     let inputSearch = handleCreateElement('input', 'gifos-header-search', 'gifos-header-search');
     inputSearch.type = 'search';
@@ -33,17 +32,50 @@ const handleSectionSearchGifo = () => {
         if (e.target.value === '') {
             removeElementId('ul-autocomplete');
             removeElementId('sg-line-search');
+            removeElementId('imgsearch-1');
+            removeElementId('imgsearch-lupa');
+            elementId('sg-container-search').appendChild(handleCreateImgSearchLupa());
         }
 
     });
     inputSearch.addEventListener('keyup', (e) => {
         if (e.which === 13 || e.keyCode === 13) {
+            removeElementId('ul-autocomplete');
+            removeElementId('sg-line-search');
+            removeElementId('imgsearch-1');
+            removeElementId('imgsearch-lupa');
+            
             handleKeyPressIntro(e.target.value);
         } else {
+            removeElementId('imgsearch-lupa');
             handleAutocompleteSearch(e.target.value);
         }
     });
     divsgContainerSearch.appendChild(inputSearch);
+    
+    divsgContainerSearch.appendChild(handleCreateImgSearchLupa()); 
+    
+    
+  return divsgContainerSearch;
+};
+
+const handleCreateImgSearchLupa=()=>{
+    let imgLupa= handleCrearImg('../images/icon-search.svg', 'Lupa', 'Lupa', 'imgsearch-lupa', 'imgsearch-lupa', 'lupa');
+    imgLupa.addEventListener('click',(e)=>{
+        let inputSearch = document.getElementById('gifos-header-search').value;
+        handleKeyPressIntro(inputSearch);
+        removeElementId('ul-autocomplete');
+        removeElementId('sg-line-search');
+        removeElementId('imgsearch-1');
+        removeElementId('imgsearch-lupa');
+        elementId('sg-container-search').appendChild(handleCreateImgSearchLupa());
+    });
+    return imgLupa;
+}
+
+const handleSectionSearchGifo = () => {
+    let sectionTagSearchGifos = handleCreateElement('section', 'searchgifos', 'searchgifos');
+    let divsgContainerSearch = handleCreateInputSearch();
     sectionTagSearchGifos.appendChild(divsgContainerSearch);
     let h3TagSearchGifos = handleCreateText('h3', 'sg-h3', 'sg-h3', 'Trending');
     sectionTagSearchGifos.appendChild(h3TagSearchGifos);
@@ -76,6 +108,8 @@ const handleSTGGRID = () => {
     divStgBtnVerMas.appendChild(btnVerMas);
     sectionTag.appendChild(divStgGrid);
     sectionTag.appendChild(divStgBtnVerMas);
+
+    return sectionTag;
 };
 /********************FIN SECTION TRENDING GIFO********************/
 /********************INICIO SECTION TRENDING GIFO SLIDE********************/
@@ -175,3 +209,17 @@ contenedorPrincipal.innerHTML='';
     
 })();
 
+window.addEventListener('scroll',(e)=>{
+    let SearchHeader=elementId('header-gifos')
+    let existSearchHeader=SearchHeader.querySelector('#sg-container-search');
+ if (isMediaQuerieDesktop()===true){
+    if(window.scrollY>=400 && existSearchHeader===null){
+        SearchHeader.appendChild(handleCreateInputSearch());
+    }
+    
+    if (window.scrollY<400 && existSearchHeader!==null){
+       SearchHeader.removeChild(existSearchHeader);
+    }
+ } 
+ 
+});

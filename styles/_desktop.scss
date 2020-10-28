@@ -1,5 +1,10 @@
 @media all and (min-width:1200px) {
-
+    .btnHover{
+        @include themify($themes){
+            background:tema($hover);
+            color: tema($textBtn);
+        }
+    }
 
     .activeGifos {
         background: #9CAFC3;
@@ -13,47 +18,54 @@
     .img-notfound {
         margin-top: 109px;
     }
-
-    .searchgifos {
-        .sg-container-search {
-
-            width: 551px;
-
-
-            @include themify($themes) {
-                background: tema($bg); 
-                border: tema($border); 
-            }
-
-            .sg-line-search {
-                width: 505px;
-            }
-
-            #imgsearch-1 {
-                top: -32px;
-                left: -236px;
-            }
-        }
-
-        .gifos-header-search {
-            padding: 15px 54px 13px 55px;
-            width: 505px;
-
-            //order-radius: 27px;
-            @include themify($themes) {
-                background: tema($bg);
-            }
-
-            //border: 1px solid $bgcolorligth;
-        }
-
+     .header-gifos>.sg-container-search{
+      grid-area: search;
+        justify-self:  center;
+        align-self: baseline;
+        margin-top: 25px;
+        width: 334px;
         .ul-autocomplete {
-            width: 505px;
+            width: 334px;
+        }
+        .gifos-header-search {
+                 width: 234px;
+        }
+        .sg-line-search {
+            width: 320px;
+        }
+        
+    } 
+    
+    .sg-container-search {
 
+        width: 551px;
+
+
+        @include themify($themes) {
+            background: tema($bg); 
+            border: tema($border); 
         }
 
+        .sg-line-search {
+            width: 505px;
+        }
+
+        
+   
+    }
+    .gifos-header-search {
+        padding: 15px 54px 13px 25px;
+        width: 450px;
     }
 
+    .ul-autocomplete {
+        width: 505px;
+    }
+
+
+    #stg-title{
+        margin-bottom: 60px;
+    }
 
     footer {
         height: 116px;

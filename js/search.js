@@ -43,6 +43,8 @@ const handlerSearchAsync = async (pageSearch, pageOffset) => {
 
 };
 
+
+
 const handleAutocompleteSearch = (value) => {
     let url = `${urlPrincipal}/search/tags`;
     let param = `&q=${value}`;
@@ -50,6 +52,7 @@ const handleAutocompleteSearch = (value) => {
     removeElementId('ul-autocomplete');
     removeElementId('sg-line-search');
     removeElementId('imgsearch-1');
+    removeElementId('imgsearch-lupa');
 
     let sgContainerSearch = elementId('sg-container-search');
     let divSgLine = handleCreateElement('div', 'sg-line-search', 'sg-line-search');
@@ -62,9 +65,12 @@ const handleAutocompleteSearch = (value) => {
         removeElementId('ul-autocomplete');
         removeElementId('sg-line-search');
         removeElementId('imgsearch-1');
+        removeElementId('imgsearch-lupa');
+        elementId('sg-container-search').appendChild(handleCreateImgSearchLupa());
     });
 
     sgContainerSearch.appendChild(imgSearch);
+    
     autoSearch.then(res => res.data)
         .then(data => {
 
@@ -80,6 +86,8 @@ const handleAutocompleteSearch = (value) => {
                     removeElementId('ul-autocomplete');
                     removeElementId('sg-line-search');
                     removeElementId('imgsearch-1');
+                    removeElementId('imgsearch-lupa');
+                    elementId('sg-container-search').appendChild(handleCreateImgSearchLupa());
                     let inputSearch = document.getElementById('gifos-header-search');
                     inputSearch.value = textValue;
                 });
@@ -95,6 +103,9 @@ const handleAutocompleteSearch = (value) => {
             if (length === 0) {
                 removeElementId('sg-line-search');
                 removeElementId('imgsearch-1');
+                removeElementId('imgsearch-lupa');
+                elementId('sg-container-search').appendChild(handleCreateImgSearchLupa());
+               console.log('handleAutocompleteSearch',length); 
             }
         })
         .catch(error => console.log(error));
@@ -121,12 +132,11 @@ const getGiphyID=(p_id)=>{
     let url = `${urlPrincipal}/`;
     let param = p_id;
     const gif=apiGiphy(url+param,'');
-    gif.then( res=> console.log(res))
+    gif.then( res=>res.data)
+    .then(data=>  data)
     .catch(error => console.log(error));
+    return gif;
 }
-
-
-console.log('getGiphyID',getGiphyID('xTiTnwiIYbdf0pirKM'));
 
 const getTrendingGifos = (p_id) => {
     let url = `${urlPrincipal}/trending`;

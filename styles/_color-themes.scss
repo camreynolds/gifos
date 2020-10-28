@@ -14,6 +14,9 @@ $burger:'burger';
 $bgmenu:'bgmenu';
 $burgerClose:'burgerClose';
 $bgLineGifos:'bgLineGifos';
+$camara:'camara';
+$pelicula:'pelicula';
+$searchLupa:'searchLupa';
 
 $themes:(
     light:(
@@ -32,7 +35,10 @@ $themes:(
         burger:$burger--light,
         burgerClose:$burger-close--light,
         bgmenu:$bgmenu--light,
-        bgLineGifos:$bg-line--light
+        bgLineGifos:$bg-line--light,
+        camara:$camara--light,
+        pelicula:$pelicula--light,
+        searchLupa:$searchLupa--light
     ),
     dark:(
         bg:$bg--dark,
@@ -50,7 +56,10 @@ $themes:(
         burger:$burger--dark,
         burgerClose:$burger-close--dark,
         bgmenu:$bgmenu--dark,
-        bgLineGifos:$bg-line--dark
+        bgLineGifos:$bg-line--dark,
+        camara:$camara--dark,
+        pelicula:$pelicula--dark,
+        searchLupa:$searchLupa--dark        
     )
 );
  @mixin themify($themes) {

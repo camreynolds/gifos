@@ -1,9 +1,10 @@
+"use strict";
 let cronometro;
 let streamCamera;
-
-let hours = "00",
-    minutes = "00",
-    seconds = "00";
+let form;
+let hours = `00`,
+    minutes = `00`,
+    seconds = `00`;
 
 let recorder;
 
@@ -12,7 +13,7 @@ let recorder;
 const handleActionButtonGifos = (action) => {
     let btnvideo1 = elementId('btnvideo1');
     let btnvideo2 = elementId('btnvideo2');
-    //let btnvideo3 = elementId('btnvideo3');
+    let btnvideo3 = elementId('btnvideo3');
     switch (action) {
         //Activa el boton 1 y habilita el botón 2
         case 'C1':
@@ -43,6 +44,11 @@ const handleActionButtonGifos = (action) => {
             }, false);
 
             break
+        case 'SubirGifo':
+            btnvideo2.classList.toggle("actives");
+            btnvideo3.classList.toggle("actives");
+            break;
+
         default:
             break;
     }
@@ -82,7 +88,7 @@ const handleCreateGIFOS = () => {
     addImg = handleCrearImg('../images/pelicula.svg', 'Cámara', 'Cámara', 'imgCam2', 'camara', '');
     divImgCam2.appendChild(addImg);
 
-    let botonera=handleCreateElement('div', 'botoneraGifos', 'botoneraGifos')
+    let botonera = handleCreateElement('div', 'botoneraGifos', 'botoneraGifos')
     let btns = handleCreateElement('button', 'btn btnvideo', 'btnvideo1');
     btns.innerHTML = '1';
     btns.disabled = true
@@ -117,31 +123,31 @@ const handleCreateGIFOS = () => {
 const getStreamAndRecord = (evt) => {
     removeElementId(evt.id)
     let addBtnSave = elementId('div-btnvideo-gifos');
-    let pTagCron =handleCreateElement('div','pcronometro','pcronometro');// handleCreateText('p', 'pcronometro', 'pcronometro', '00:00:00');
-    pTagCron.textContent='00:00:00'
+    let pTagCron = handleCreateElement('div', 'pcronometro', 'pcronometro'); // handleCreateText('p', 'pcronometro', 'pcronometro', '00:00:00');
+    pTagCron.textContent = '00:00:00'
     elementId('div-botones').appendChild(pTagCron);
-    
-    
 
-    let btns =btnFinalizar();
-    
+
+
+    let btns = btnFinalizar();
+
     addBtnSave.appendChild(btns);
 
     startRecording();
-    
+
 };
 
-const btnFinalizar=()=>{
+const btnFinalizar = () => {
     let addBtnSave = elementId('div-btnvideo-gifos');
     let btns = handleCreateElement('button', 'btn btnvermas', 'btnvideofinalizar');
     btns.innerHTML = 'FINALIZAR';
     btns.addEventListener('click', (e) => {
         //handleActionButtonGifos('Finalizar');
-        stopRecording();        
+        stopRecording();
         removeElementId('pcronometro');
         removeElementId('btnvideofinalizar');
         let btns = btnSubirGifo();
-        
+
         addBtnSave.appendChild(btns);
 
         let aRepCap = repetirCaptura();
@@ -151,12 +157,95 @@ const btnFinalizar=()=>{
     return btns;
 };
 
-const btnSubirGifo=()=>{
-    let btns=handleCreateElement('button', 'btn btnvermas', 'btnvideosubirgifo');
+/* GIF SUBIDOS
+NOBGa4aL54rkHkbqhv
+kZBkoNchvpPI9qkETX
+KUlCDPQe5RauBB9JV6
+*/
+const btnSubirGifo = () => {
+    let btns = handleCreateElement('button', 'btn btnvermas', 'btnvideosubirgifo');
     btns.innerHTML = 'SUBIR GIFO';
+    btns.addEventListener('click', (e) => {
+        if (recorder) {
+            recorder.destroy;
+            recorder = null;
+        }
+        uploadGifoText('../images/loader.svg', 'Estamos subiendo tu GIFO.')
+        removeElementId('repetircaptura');
+        elementId('sec-create-gifos-canvas').classList.toggle("sec-create-gifos-canvas-up");
+
+  /*           const gifs=getGiphyID('kZBkoNchvpPI9qkETX');
+            gifs.then(result=> result.data)
+            .then(res=>{
+                let classDataImage = new DataImage(res.id, res.images.original.url, res.title, res.title, res.username, 0, 'mainGifos');
+                saveLocalStorageGifos(classDataImage);
+                uploadGifoText('../images/ok.svg','GIFO subido con éxito.');
+                let btnDownload=btnDownloadGifos(res.id);
+                btnDownload.setAttribute('data-download-gif',res.images.original.url);
+                elementId('sec-create-gifos-canvas-div').appendChild(btnDownload);
+                elementId('sec-create-gifos-canvas-div').appendChild(handleBtnCopyUrl(res.id,res.images.original.url));
+                removeElementId('btnvideosubirgifo');
+            })
+            .catch(error=> console.log(error));   */
+
+         apiGiphyUpload(form)
+            .then(res => {
+                console.log('btnSubirGifo', res.data.id);
+                getGiphyID(res.data.id);
+                handleActionButtonGifos('SubirGifo');
+                const gifs = getGiphyID(res.data.id);
+                gifs.then(result => result.data)
+                    .then(res => {
+                        let classDataImage = new DataImage(res.id, res.images.original.url, res.title, res.title, res.username, 0, 'mainGifos');
+                        saveLocalStorageGifos(classDataImage);
+                        uploadGifoText('../images/ok.svg', 'GIFO subido con éxito.');
+                        let btnDownload = btnDownloadGifos(res.id);
+                        btnDownload.setAttribute('data-download-gif', res.images.original.url);
+                        elementId('sec-create-gifos-canvas-div').appendChild(btnDownload);
+                        elementId('sec-create-gifos-canvas-div').appendChild(handleBtnCopyUrl(res.id, res.images.original.url));
+                        removeElementId('btnvideosubirgifo');
+                    })
+                    .catch(error => console.log(error));
+            })
+            .catch(error => console.log(error)); 
+
+
+    });
+    console.log('RETORNA');
     return btns;
 };
-const repetirCaptura=()=>{
+
+
+const handleBtnCopyUrl = (p_id, p_url) => {
+    let btnCopyUrl = handleCreateElement('button', 'btn-principal btn-copy-url', 'COPYURL:' + p_id);
+    btnCopyUrl.setAttribute('data-copy-url', p_url);
+    btnCopyUrl.addEventListener('click', (e) => {
+        const copyurl=btnCopyUrl.dataset.copyUrl
+        let auxcp=handleCreateText('textarea','txtcp','txtcp',copyurl);
+        document.body.appendChild(auxcp);
+        auxcp.select();
+        document.execCommand("copy");
+        removeElementId('txtcp');
+    });
+    return btnCopyUrl;
+};
+
+const btnDownloadGifos = (p_id) => {
+    return handleBtnDownload(p_id);
+};
+
+const uploadGifoText = (p_src, p_text) => {
+    removeElementId('imgLoadOk');
+    removeElementId('p-gifos');
+    let divCanvas = elementId('sec-create-gifos-canvas-div');
+    const imgload = handleCrearImg(p_src, 'loadOK', 'loadOK', 'imgLoadOk', '', '', 0, 'createGifos');
+    const textGifos = handleCreateText('p', 'p-gifos', 'p-gifos', p_text);
+    divCanvas.appendChild(imgload);
+    divCanvas.appendChild(textGifos);
+};
+
+
+const repetirCaptura = () => {
     let aRepCap = handleCreateText('a', 'repetircaptura', 'repetircaptura', 'REPETIR CAPTURA');
     aRepCap.addEventListener('click', (e) => {
         removeElementId('repetircaptura');
@@ -179,7 +268,7 @@ const getStreamVideo = () => {
     };
     navigator.mediaDevices.getUserMedia(constraint)
         .then(stream => {
-            streamCamera=stream;
+            streamCamera = stream;
             createSecVideos(streamCamera);
             let addBtnSave = elementId('div-btnvideo-gifos');
             let btns = btnGrabar();
@@ -198,6 +287,7 @@ const createSecVideos = (stream) => {
     removeElementId('btnvideosubirgifo');
     removeElementId('btnvideosave');
     removeElementId('sec-create-gifos-videos');
+    removeElementId('sec-create-gifos-canvas-cont');
     let video = elementId('div-video-gifos');
     let addVideo = handleCreateElement('video', 'sec-create-gifos-videos', 'sec-create-gifos-videos');
 
@@ -205,6 +295,24 @@ const createSecVideos = (stream) => {
     addVideo.play();
     video.appendChild(addVideo);
 }
+
+const createCanvasTag = () => {
+    const divCanvas = handleCreateElement('div', 'sec-create-gifos-canvas-cont', 'sec-create-gifos-canvas-cont');
+    const canvas = handleCreateElement('canvas', 'sec-create-gifos-canvas', 'sec-create-gifos-canvas');
+    const divCan = handleCreateElement('div', 'sec-create-gifos-canvas-div', 'sec-create-gifos-canvas-div');
+    divCanvas.appendChild(canvas);
+    divCanvas.appendChild(divCan);
+    return divCanvas;
+};
+
+const captureVideoInCanvas = () => {
+    let video = elementId('div-video-gifos');
+    video.appendChild(createCanvasTag());
+    let canvasCTX = elementId('sec-create-gifos-canvas').getContext('2d');
+    let videoCTX = elementId('sec-create-gifos-videos');
+    canvasCTX.drawImage(videoCTX, 0, 0, 320, 160);
+    removeElementId('sec-create-gifos-videos');
+};
 
 const btnGrabar = () => {
     let btns = handleCreateElement('button', 'btn btnvermas', 'btnvideosave');
@@ -257,43 +365,45 @@ let getCronometroInit = () => {
         if (hours < 10) hours = `0` + hours
     }
 
-    let pTagCron=elementId('pcronometro');
+    let pTagCron = elementId('pcronometro');
     pTagCron.textContent = `${hours}:${minutes}:${seconds}`;
 };
 
 const stopCronometro = () => {
-    hours = "00";
-    minutes = "00";
-    seconds = "00";
-     clearInterval(cronometro);
+
+
+    hours = `00`;
+    minutes = `00`;
+    seconds = `00`;
+    clearInterval(cronometro);
 }
 
 
 const startRecording = () => {
-    
-     recorder = RecordRTC(streamCamera, {
+
+    recorder = RecordRTC(streamCamera, {
         type: 'gif',
         frameRate: 1,
         quality: 10,
         width: 360,
         hidden: 240,
-        onGifRecordingStarted:  ()=> {
+        onGifRecordingStarted: () => {
             console.log('Comienza la grabación')
         }
     });
-    
+
     recorder.startRecording();
-    cronometro = setInterval(getCronometroInit(), 1000);
-    
+    cronometro = setInterval(getCronometroInit, 1000);
+
 };
 
 const stopRecording = () => {
-   stopCronometro(); 
-   recorder.stopRecording(()=>{
-    let form=new FormData();
-    form.append('file',recorder.getBlob(),'SebaCabGif.gif');
-    console.log(form.get('file'));
-   });
-  
-};
+    stopCronometro();
+    recorder.stopRecording(() => {
+        form = new FormData();
+        form.append('file', recorder.getBlob(), 'SebaCabGif.gif');
+        console.log('stopRecording', form.get('file'));
 
+    });
+    captureVideoInCanvas();
+};

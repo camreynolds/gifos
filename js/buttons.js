@@ -13,7 +13,17 @@ const handlerVerMas = () => {
     handlerSearchAsync(valuesSearch, pageOffsetInc);
 };
 
-const handleCreateButtonFDO = (divCont, p_data_target, p_id, p_username, p_title,p_url) => {
+const btnFavoriteDelete=(p_typePage,p_id, isModal)=>{
+    let btns;
+    if(p_typePage==='mainGifos'){
+        btns=handleBtnDelete(p_id);          
+    }else{
+        btns= (isModal===false)? handleBtnFavorite('FAV:' + p_id):handleBtnFavorite('FAVOPEN:' + p_id);
+        btns.setAttribute('data-favorite-id',p_id);
+    }
+    return btns
+};
+const handleCreateButtonFDO = (divCont, p_data_target, p_id, p_username, p_title,p_url,p_typePage) => {
     let divCBID = 'stgConBtn' + p_id;
     removeElementId(divCBID);
 
@@ -21,15 +31,16 @@ const handleCreateButtonFDO = (divCont, p_data_target, p_id, p_username, p_title
     divBtn.setAttribute('data-stgcont-btns', p_data_target + 'btn');
     divBtn.setAttribute('data-favorite-active', p_data_target + ':' + p_id);
 
-    let btnFavorite = handleBtnFavorite('FAV:' + p_id);
-        btnFavorite.setAttribute('data-favorite-id',p_id);
+    let btnFavDel=btnFavoriteDelete(p_typePage,p_id,false);
+  
+   
     let btnDownload = handleBtnDownload(p_id);
         btnDownload.setAttribute('data-download-gif',p_url);
     const btnOpen = handleBtnOpen(p_id);
 
     let username = handleCreateText('p', 'p-username', 'p-username', p_username);
     let title = handleCreateText('p', 'p-title', 'p-title', p_title);
-    divBtn.appendChild(btnFavorite);
+    divBtn.appendChild(btnFavDel);
     divBtn.appendChild(btnDownload);
     divBtn.appendChild(btnOpen);
     divBtn.appendChild(username);
@@ -44,6 +55,17 @@ const handleBtnOpen = (p_id) => {
         return handleOpen(btnOpen.id)
     });
     return btnOpen;
+};
+
+const handleBtnDelete = (p_id) => {
+    console.log(p_id);
+    let btnDelete = handleCreateElement('button', 'btn-principal btn-delete', lsGIFOS + p_id);
+    btnDelete.addEventListener('click', (e) => {
+        removeLocalStorage(e.target.id);
+        removeElementId('modal');
+        createSectionFavorites('GIFOS');
+    });
+    return btnDelete;
 };
 
 const handleBtnDownload = (p_id) => {

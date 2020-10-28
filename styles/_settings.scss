@@ -15,8 +15,9 @@ $burger--light:url(../images/burger.svg);
 $burger-close--light:url(../images/button-close.svg);
 $bgmenu--light:  rgba(87,46,229,0.90);
 $bg-line--light:$color--ligth;
-
-
+$camara--light:url(../images/camara.svg);
+$pelicula--light:url(../images/pelicula.svg);
+$searchLupa--light:url(../images/icon-search.svg);
 
 //DARK
 $bg--dark:#37383C;
@@ -33,7 +34,9 @@ $burger--dark:url(../images/burger-modo-noct.svg);
 $burger-close--dark:url(../images/close-modo-noct.svg);
 $bgmenu--dark: #000000;
 $bg-line--dark:#FFFFFF;
-
+$camara--dark:url(../images/camara-modo-noc.svg);
+$pelicula--dark:url(../images/pelicula-modo-noc.svg);
+$searchLupa--dark:url(../images/icon-search-modo-noct.svg);
 
 //FUENTES
 $font-weight--regular: 400;
