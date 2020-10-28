@@ -67,4 +67,6 @@ const getInfoFavoritesGifos=(p_idx,p_typePage)=>{
     return ls;
 }
 
- 
+const getIndexLocalStorages=(p_key)=>{
+    return Object.keys(localStorage).findIndex(item=> item===p_key);
+}

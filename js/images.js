@@ -82,10 +82,11 @@ const handleFavorite = (e) => {
     e.classList.toggle("btnactive");
     let id = e.id;
     let btnSTGActive = document.getElementById(id);
-    if (btnSTGActive.classList[3] === "btnactive") {
+    
+    if (btnSTGActive.classList[3] === "btnactive"||btnSTGActive.classList[2] === "btnactive") {
         let imgData = document.getElementById(e.dataset.favoriteId);
         let classDataImage = new DataImage(e.dataset.favoriteId, imgData.src, imgData.alt, imgData.title, imgData.dataset.targetUsername, imgData.dataset.targetOffset, 'mainFavorites' /* imgData.dataset.typePage */ );
-        saveLocalStorage(classDataImage);
+         saveLocalStorage(classDataImage);
     } else {
         removeLocalStorage(e.dataset.favoriteId);
         removeElementId('modal');
