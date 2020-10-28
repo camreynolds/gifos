@@ -13,7 +13,7 @@ let clickCount = 0;
 const handleSectionGifosHeader = () => {
     let sectionTagGifosHeader = handleCreateElement('section', 'gifos-header', 'gifos-header');
     let h1GifosHeader = handleCreateElement('h1', 'gf-h1', 'gf-h1');
-    let imgGifosHeader = handleCrearImg('../images/ilustra_header.svg', 'Ilustra Header', 'Ilustra Header', 'imgIlustra', 'ilustraHeader', 'IlustraHeader',0,'IlustraHeader');
+    let imgGifosHeader = handleCrearImg('images/ilustra_header.svg', 'Ilustra Header', 'Ilustra Header', 'imgIlustra', 'ilustraHeader', 'IlustraHeader',0,'IlustraHeader');
 
     h1GifosHeader.innerHTML = 'Inspírate, busca, guarda, y crea los mejores';
     sectionTagGifosHeader.appendChild(h1GifosHeader);
