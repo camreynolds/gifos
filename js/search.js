@@ -138,9 +138,48 @@ const getGiphyID=(p_id)=>{
     return gif;
 }
 
+const getTrendingSuggestions=()=>{
+    const url = 'https://api.giphy.com/v1/trending/searches';
+    return apiGiphy(url,'');
+};
+
+const getTrendingSuggestionsRnd= async (p_divCont)=>{
+const quantity=5;
+const idx=[0,10,15];
+const i = Math.floor(Math.random() * 3);
+const min=idx[i];
+    try {
+        const suggTrend= await  getTrendingSuggestions();
+        const res= await suggTrend.data;
+        let count=0;
+         for(let data of res.slice(min,min+quantity)){
+             count++; 
+            
+             let v_coma=(count===quantity)?'':', ';
+             let aTrendSugg=handleCreateText('a','a-trending','a-trending',data+v_coma);
+             aTrendSugg.addEventListener('click',(e)=>{
+                 const str=e.target.innerHTML.trim();
+                 const idx=str.indexOf(',',str.length-1);
+                 const searchValue= (idx===-1)? str : str.substring(0,idx);
+                 elementId('stg-title').innerHTML=searchValue;
+                 removeElementId('stg-grid');
+                removeElementId('stg-btnvermas');
+                removeElementId('img-notfound');
+                handlerSearchAsync(searchValue,0);
+            },false);
+            p_divCont.appendChild(aTrendSugg);
+        } 
+      
+    } catch (error) {
+        console.error(error);
+    }
+    
+};
+
+
 const getTrendingGifos = (p_id) => {
-    let url = `${urlPrincipal}/trending`;
-    let param = '&limit=50';
+    const url = `${urlPrincipal}/trending`;
+    const param = '&limit=50';
 
     const trending = apiGiphy(url, param);
     trending.then(res => res.data)

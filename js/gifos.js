@@ -337,12 +337,18 @@ const handleStartVideo = (p_btn) => {
     navigator.mediaDevices.getUserMedia({
         'video': true
     }).then(stream => {
+        console.log(stream);
         if (p_btn === 'Grabar') {
             removeElementId('btnvideoact');
         } else {
             p_btn.remove();
         }
         handleActionButtonGifos('C1');
+        getStreamVideo();
+    })
+    .catch(e=> {
+        handleCreateGIFOS();
+        console.log(e);
     });
 }
 

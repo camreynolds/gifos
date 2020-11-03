@@ -9,7 +9,9 @@ const ocultarVerMas = (p_flag_ocultar) => {
 
 const handlerVerMas = () => {
     pageOffsetInc = pageOffsetInc + pageLimit;
-    let valuesSearch = document.getElementById('gifos-header-search').value;
+    
+    const valuesSearch = elementId('stg-title').innerHTML;
+    console.log(valuesSearch);
     handlerSearchAsync(valuesSearch, pageOffsetInc);
 };
 

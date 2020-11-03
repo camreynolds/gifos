@@ -45,7 +45,7 @@ h3 {
     text-align: center;
 }
 
-p {
+p, #a-trending {
     font-family: 'Montserrat';
     font-weight: 500;
 
@@ -222,10 +222,12 @@ p {
     .sg-parrafo {
         align-self: center;
         width: 225px;
+        text-align: center;
 
-        p {
+        a{
             line-height: 25px;
             font-size: 14px;
+            cursor: pointer;
         }
     }
 

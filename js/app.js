@@ -81,8 +81,10 @@ const handleSectionSearchGifo = () => {
     sectionTagSearchGifos.appendChild(h3TagSearchGifos);
     let divSgParrafo = handleCreateElement('div', 'sg-parrafo', 'sg-parrafo');
     sectionTagSearchGifos.appendChild(divSgParrafo);
-    let pSGTag = handleCreateText('p', 'sg-p', 'sg-p', 'Reactions, Entertainment, Sports, Stickers, Artists');
-    divSgParrafo.appendChild(pSGTag);
+    //let pSGTag = handleCreateText('p', 'sg-p', 'sg-p', 'Reactions, Entertainment, Sports, Stickers, Artists');
+    //divSgParrafo.appendChild(pSGTag);
+    getTrendingSuggestionsRnd(divSgParrafo, 5);
+    
     let _divSgLine = handleCreateElement('div', 'sg-line', 'sg-line');
     sectionTagSearchGifos.appendChild(divSgParrafo);
     sectionTagSearchGifos.appendChild(_divSgLine);
@@ -210,10 +212,11 @@ contenedorPrincipal.innerHTML='';
 })();
 
 window.addEventListener('scroll',(e)=>{
-    let SearchHeader=elementId('header-gifos')
+    let SearchHeader=elementId('header-gifos');
     let existSearchHeader=SearchHeader.querySelector('#sg-container-search');
  if (isMediaQuerieDesktop()===true){
     if(window.scrollY>=400 && existSearchHeader===null){
+        
         SearchHeader.appendChild(handleCreateInputSearch());
     }
     
